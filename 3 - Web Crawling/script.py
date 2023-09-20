@@ -1,17 +1,14 @@
-from connect_manager import ConnectToSite
-from selenium.webdriver.common.by import By
-from time import sleep
+import requests
+from bs4 import BeautifulSoup
+import json
 
-url = 'http://books.toscrape.com/index.html'
+with open('links.json') as file:
+    links = json.load(file)
 
-with ConnectToSite(url) as driver:
-    articles = driver.find_elements(By.TAG_NAME,'article')
-    links_element = [
-        article.find_element(By.TAG_NAME, 'a').get_attribute('href')
-        for article in articles
-    ]
-    print(links_element)
-    #link = articles[0].find_element(By.TAG_NAME, 'a')
-    #link.click()
 
-    
+r = requests.get(links[0])
+
+soup = BeautifulSoup(r.text, 'html.parser')
+title = soup.find('h1')
+
+print(title.text)
