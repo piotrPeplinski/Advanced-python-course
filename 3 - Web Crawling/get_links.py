@@ -13,5 +13,6 @@ with ConnectToSite(url) as driver:
         for article in articles
     ]
 
+
 with open('links.json', 'w') as file:
     json.dump(links, file)
