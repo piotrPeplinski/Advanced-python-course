@@ -1,9 +1,14 @@
 import matplotlib.pyplot as plt
+from exceptions import UnorderedAxisError
 
 
 class Chart:
     def __init__(self, x: list, y: list, title: str, x_label: str, y_label: str = 'Price'):
-        self.__x = x
+        if x.is_monotonic_increasing:
+            self.__x = x
+        else:
+            raise UnorderedAxisError(
+                'Values on X axis should be in ascending order')
         self.__y = y
         self.__x_label = x_label
         self.__y_label = y_label

@@ -25,23 +25,28 @@ df = pd.DataFrame({
 with open('links.json') as file:
     links = json.load(file)
 
+links.insert(0, 'hello.uw')
 
 for link in links:
 
-    r = requests.get(link)
+    try:
+        r = requests.get(link)
+    except requests.exceptions.MissingSchema as e:
+        print(e)
+    else:
 
-    soup = BeautifulSoup(r.text, 'html.parser')
+        soup = BeautifulSoup(r.text, 'html.parser')
 
-    stock_el = soup.find(class_='availability').stripped_strings
-    rating_key = soup.find(class_='star-rating').attrs['class'][1]
+        stock_el = soup.find(class_='availability').stripped_strings
+        rating_key = soup.find(class_='star-rating').attrs['class'][1]
 
-    title = soup.find('h1').text
-    price = soup.find(class_='price_color').text[2:]
-    stock = list(stock_el)[0].split(' ')[2][1:]
-    rating = rating_enum[rating_key]
+        title = soup.find('h1').text
+        price = soup.find(class_='price_color').text[2:]
+        stock = list(stock_el)[0].split(' ')[2][1:]
+        rating = rating_enum[rating_key]
 
-    df.loc[len(df)] = {'Title': title, 'Price': float(price),
-                       'Stock': stock, 'Rating': rating}
+        df.loc[len(df)] = {'Title': title, 'Price': float(price),
+                        'Stock': stock, 'Rating': rating}
 
 df.sort_values('Rating', inplace=True)
 

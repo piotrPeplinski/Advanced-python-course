@@ -19,11 +19,18 @@ with open('rating.pickle', 'rb') as file:
 with open('stocks.pickle', 'rb') as file:
     stocks_chart = pickle.load(file)
 
+current_chart = None
 
 def show_chart(chart):
+    global current_chart
+    if current_chart:
+        current_chart.get_tk_widget().destroy()
+        current_chart = None
+
     canvas = FigureCanvasTkAgg(chart.get_figure(), chart_frame)
     canvas.get_tk_widget().pack()
     canvas.draw()
+    current_chart = canvas
 
 
 ratings_btn = ttk.Button(root, text='Show ratings chart',
