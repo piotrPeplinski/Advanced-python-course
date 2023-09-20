@@ -4,7 +4,6 @@ from chart_class import Chart
 import pickle
 
 
-
 root = tk.Tk()
 root.title('Books prices')
 root.geometry('800x500')

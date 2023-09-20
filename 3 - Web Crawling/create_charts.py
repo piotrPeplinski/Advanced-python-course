@@ -4,6 +4,8 @@ import json
 import pandas as pd
 import pickle
 from chart_class import Chart
+import matplotlib.pyplot as plt
+
 
 rating_enum = {
     'One': 1,
@@ -43,5 +45,17 @@ for link in links:
 
 df.sort_values('Rating', inplace=True)
 
-with open('data_frame.pickle', 'wb') as file:
-     pickle.dump(df, file)
+ratings = df['Rating']
+prices = df['Price']
+stocks = df['Stock']
+
+
+rating_chart = Chart(ratings, prices, 'Rating impact on price', 'Rating')
+stocks_chart = Chart(
+    stocks, prices, 'Book availability impact on price', 'Stock')
+
+with open('rating.pickle', 'wb') as file:
+    pickle.dump(rating_chart, file)
+
+with open('stocks.pickle', 'wb') as file:
+    pickle.dump(stocks, file)
