@@ -58,4 +58,4 @@ with open('rating.pickle', 'wb') as file:
     pickle.dump(rating_chart, file)
 
 with open('stocks.pickle', 'wb') as file:
-    pickle.dump(stocks, file)
+    pickle.dump(stocks_chart, file)

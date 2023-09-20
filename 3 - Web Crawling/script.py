@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pickle
+from functools import partial
 
 
 root = tk.Tk()
@@ -18,12 +19,19 @@ with open('rating.pickle', 'rb') as file:
 with open('stocks.pickle', 'rb') as file:
     stocks_chart = pickle.load(file)
 
-def show_ratings():
-    canvas = FigureCanvasTkAgg(ratings_chart.get_figure(), chart_frame)
+
+def show_chart(chart):
+    canvas = FigureCanvasTkAgg(chart.get_figure(), chart_frame)
     canvas.get_tk_widget().pack()
     canvas.draw()
 
-ratings_btn = ttk.Button(root, text='Show ratings chart', command=show_ratings)
+
+ratings_btn = ttk.Button(root, text='Show ratings chart',
+                         command=partial(show_chart, ratings_chart))
 ratings_btn.pack(side=tk.TOP, padx=5, pady=5)
+
+stocks_btn = ttk.Button(root, text='Show stock chart',
+                        command=partial(show_chart, stocks_chart))
+stocks_btn.pack(side=tk.TOP, padx=5, pady=5)
 
 root.mainloop()
