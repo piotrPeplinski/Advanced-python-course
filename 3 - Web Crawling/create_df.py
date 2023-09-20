@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import pandas as pd
 import pickle
+from chart_class import Chart
 
 rating_enum = {
     'One': 1,
@@ -43,4 +44,4 @@ for link in links:
 df.sort_values('Rating', inplace=True)
 
 with open('data_frame.pickle', 'wb') as file:
-    pickle.dump(df, file)
+     pickle.dump(df, file)

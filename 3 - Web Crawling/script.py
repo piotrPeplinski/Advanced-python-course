@@ -1,28 +1,24 @@
+import tkinter as tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from chart_class import Chart
 import pickle
-import matplotlib.pyplot as plt
+
+
+
+root = tk.Tk()
+root.title('Books prices')
+root.geometry('800x500')
+
+chart_frame = tk.Frame(root, background='#ffffff')
+chart_frame.pack(side=tk.LEFT, padx=10, pady=10)
 
 with open('data_frame.pickle', 'rb') as file:
     df = pickle.load(file)
 
+chart = Chart(df['Rating'], df['Price'], 'hello', 'Rating')
 
-class Chart:
-    def __init__(self, x: list, y: list, title: str, x_label: str, y_label: str = 'Price'):
-        self.__x = x
-        self.__y = y
-        self.__x_label = x_label
-        self.__y_label = y_label
-        self.__title = title
-        self.generate_chart()
+canvas = FigureCanvasTkAgg(chart.get_figure(), chart_frame)
+canvas.get_tk_widget().pack()
+canvas.draw()
 
-    def generate_chart(self):
-        fig, ax = plt.subplots(figsize=(8, 5))
-        ax.scatter(self.__x, self.__y)
-        ax.set_title(self.__title, fontsize=14)
-        ax.set_xlabel(self.__x_label)
-        ax.set_ylabel(self.__y_label)
-        ax.grid(True)
-
-
-chart = Chart(df['Rating'], df['Price'], 'Rating relation to price', 'Rating')
-
-plt.show()
+root.mainloop()
