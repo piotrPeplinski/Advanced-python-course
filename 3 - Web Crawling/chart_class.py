@@ -11,7 +11,7 @@ class Chart:
         self.generate_chart()
 
     def generate_chart(self):
-        self.__fig, ax = plt.subplots(figsize=(8, 5))
+        self.__fig, ax = plt.subplots(figsize=(6, 5))
         ax.scatter(self.__x, self.__y)
         ax.set_title(self.__title, fontsize=14)
         ax.set_xlabel(self.__x_label)
