@@ -1,0 +1,11 @@
+OrderID,Product,Category,Price,Quantity,Date,Customer
+101,Widget A,Electronics,25.00,2,2023-09-01,John Doe
+102,Widget B,Electronics,35.00,1,2023-09-01,Jane Smith
+103,Widget C,Electronics,15.00,4,2023-09-02,Bob Johnson
+104,Widget A,Electronics,25.00,2,2023-09-02,Emily Davis
+105,Widget D,Home & Garden,45.00,3,2023-09-03,David Brown
+106,Widget B,Electronics,35.00,1,2023-09-03,Susan Wilson
+107,Widget E,Home & Garden,55.00,2,2023-09-04,Michael Lee
+108,Widget A,Electronics,25.00,2,2023-09-04,Lisa Hall
+109,Widget C,Electronics,15.00,3,2023-09-05,Chris Turner
+110,Widget D,Home & Garden,45.00,1,2023-09-05,Sarah Martin
