@@ -25,7 +25,6 @@ df = pd.DataFrame({
 with open('links.json') as file:
     links = json.load(file)
 
-links.insert(0, 'hello.uw')
 
 for link in links:
 
@@ -64,3 +63,5 @@ with open('rating.pickle', 'wb') as file:
 
 with open('stocks.pickle', 'wb') as file:
     pickle.dump(stocks_chart, file)
+
+plt.show()
